@@ -5,6 +5,9 @@
  */
 package src;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author ANDY ESCOBAR
@@ -16,7 +19,9 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
      */
     public JF_Modulo_Compra() {
         initComponents();
+        mostrarProductos();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -53,6 +58,7 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jPanel10 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        panel_ManagerModuloCompra = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -100,11 +106,21 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PRODUCTOS");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -127,11 +143,21 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("PROVEEDORES");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -325,6 +351,21 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, 440));
 
+        panel_ManagerModuloCompra.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panel_ManagerModuloCompraLayout = new javax.swing.GroupLayout(panel_ManagerModuloCompra);
+        panel_ManagerModuloCompra.setLayout(panel_ManagerModuloCompraLayout);
+        panel_ManagerModuloCompraLayout.setHorizontalGroup(
+            panel_ManagerModuloCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+        panel_ManagerModuloCompraLayout.setVerticalGroup(
+            panel_ManagerModuloCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 430, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(panel_ManagerModuloCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 610, 430));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -345,6 +386,49 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
         this.dispose();;
     }//GEN-LAST:event_btnBackMouseClicked
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        mostrarProveedores();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        mostrarProveedores();
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        mostrarProductos();
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        mostrarProductos();
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    
+    
+    private void mostrarProveedores(){
+        JPanel p =panel_ManagerModuloCompra;
+        panel.JP_ModuloCompra_Admin_Proveedores pnlProveedores=new panel.JP_ModuloCompra_Admin_Proveedores();
+        pnlProveedores.setSize(p.getSize());
+        pnlProveedores.setLocale(p.getLocale());
+        
+        panel_ManagerModuloCompra.removeAll();
+        panel_ManagerModuloCompra.add(pnlProveedores,BorderLayout.CENTER);
+        panel_ManagerModuloCompra.revalidate();
+        panel_ManagerModuloCompra.repaint();
+        
+        
+        
+    }
+    private void mostrarProductos(){
+        JPanel p= panel_ManagerModuloCompra;
+        panel.JP_ModuloCompra_Productos pnlProductos=new panel.JP_ModuloCompra_Productos();
+        pnlProductos.setSize(p.getSize());
+        pnlProductos.setLocale(p.getLocale());
+        
+        panel_ManagerModuloCompra.removeAll();
+        panel_ManagerModuloCompra.add(pnlProductos,BorderLayout.CENTER);
+        panel_ManagerModuloCompra.revalidate();
+        panel_ManagerModuloCompra.repaint();
+    }
     /**
      * @param args the command line arguments
      */
@@ -406,5 +490,6 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    public javax.swing.JPanel panel_ManagerModuloCompra;
     // End of variables declaration//GEN-END:variables
 }
