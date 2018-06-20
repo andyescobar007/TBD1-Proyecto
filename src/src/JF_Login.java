@@ -90,6 +90,11 @@ public class JF_Login extends javax.swing.JFrame {
         btnIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnIniciarSesion.setLabel("INICIAR SESION");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, 160, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -122,6 +127,12 @@ public class JF_Login extends javax.swing.JFrame {
     private void txtUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsernameMouseClicked
         txtUsername.setText("");
     }//GEN-LAST:event_txtUsernameMouseClicked
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+            JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
+            menuAdmin.setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
