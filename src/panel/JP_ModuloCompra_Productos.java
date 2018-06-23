@@ -5,6 +5,8 @@
  */
 package panel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ANDY ESCOBAR
@@ -162,17 +164,20 @@ public class JP_ModuloCompra_Productos extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        agregarProveedor();
+        conectToDB();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        updateProveedor();
+       conectToDB();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         conectToDB();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void conectToDB(){
+        JOptionPane.showMessageDialog(null,"Todavia no hay una base de Datos Conectada!");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
