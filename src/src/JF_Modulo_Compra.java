@@ -409,7 +409,7 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
     
     private void mostrarProveedores(){
         JPanel p =panel_ManagerModuloCompra;
-        panel.JP_ModuloCompra_Admin_Proveedores pnlProveedores=new panel.JP_ModuloCompra_Admin_Proveedores();
+        panel.JP_ModuloCompra_Proveedores pnlProveedores=new panel.JP_ModuloCompra_Proveedores();
         pnlProveedores.setSize(p.getSize());
         pnlProveedores.setLocale(p.getLocale());
         

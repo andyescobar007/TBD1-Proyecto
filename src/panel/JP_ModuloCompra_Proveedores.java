@@ -9,17 +9,18 @@ import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import src.JF_ProveedorADD;
+import src.JF_ProveedorUPDATE;
 
 /**
  *
  * @author ANDY ESCOBAR
  */
-public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
+public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
 
     /**
      * Creates new form JP_ModuloCompra_Admin_Proveedores
      */
-    public JP_ModuloCompra_Admin_Proveedores() {
+    public JP_ModuloCompra_Proveedores() {
         initComponents();
     }
 
@@ -39,7 +40,7 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
@@ -86,11 +87,11 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("EDITAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -114,7 +115,7 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addGap(26, 26, 26))
@@ -125,7 +126,7 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1)
                     .addComponent(jButton2))
@@ -180,6 +181,11 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
         
     }
     
+    private void updateProveedor(){
+        JF_ProveedorUPDATE pUPDATEProveedor=new JF_ProveedorUPDATE();
+        pUPDATEProveedor.setVisible(true);
+    }
+    
     private void conectToDB(){
         JOptionPane.showMessageDialog(null,"Todavia no hay una base de Datos Conectada!");
     }
@@ -195,9 +201,9 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
         conectToDB();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        conectToDB();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        updateProveedor();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         conectToDB();
@@ -206,9 +212,9 @@ public class JP_ModuloCompra_Admin_Proveedores extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
