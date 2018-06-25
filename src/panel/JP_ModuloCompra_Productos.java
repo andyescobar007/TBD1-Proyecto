@@ -6,6 +6,10 @@
 package panel;
 
 import javax.swing.JOptionPane;
+import src.JF_OrdenCompraADD;
+import src.JF_OrdenCompraUPDATE;
+import src.JF_Productos_CompraADD;
+import src.JF_Productos_CompraUPDATE;
 
 /**
  *
@@ -164,17 +168,30 @@ public class JP_ModuloCompra_Productos extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        conectToDB();
+        addProducto();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-       conectToDB();
+       updateProducto();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         conectToDB();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void addProducto(){
+        JF_Productos_CompraADD producto= new JF_Productos_CompraADD();
+        producto.setVisible(true);
+    }
+    
+    
+    private void updateProducto(){
+        JF_Productos_CompraUPDATE producto=new JF_Productos_CompraUPDATE();
+        producto.setVisible(true);
+    
+    }
+   
+    
     private void conectToDB(){
         JOptionPane.showMessageDialog(null,"Todavia no hay una base de Datos Conectada!");
     }

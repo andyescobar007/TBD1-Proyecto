@@ -75,11 +75,26 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("MODULO DE VENTAS");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         LB_ICON_MODULO_COMPRA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venta.png"))); // NOI18N
+        LB_ICON_MODULO_COMPRA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LB_ICON_MODULO_COMPRAMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -247,12 +262,31 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
          abrirModuloCompra();
     }//GEN-LAST:event_LB_ICON_MODULO_COMPRA1MouseClicked
 
+    private void LB_ICON_MODULO_COMPRAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_ICON_MODULO_COMPRAMouseClicked
+        abrirModuloAlmacen();
+    }//GEN-LAST:event_LB_ICON_MODULO_COMPRAMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        abrirModuloAlmacen();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        abrirModuloAlmacen();
+    }//GEN-LAST:event_jPanel3MouseClicked
+
     
     private void abrirModuloCompra(){
         JF_Modulo_Compra modulo_compra=new JF_Modulo_Compra();
           modulo_compra.setVisible(true);
           this.dispose();
     }
+    private void abrirModuloAlmacen(){
+        JF_Modulo_Almacen modulo_Almacen=new JF_Modulo_Almacen();
+          modulo_Almacen.setVisible(true);
+          this.dispose();
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
