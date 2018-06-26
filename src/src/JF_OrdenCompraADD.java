@@ -24,6 +24,11 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         JF_getProveedor proveedor= new JF_getProveedor();
         proveedor.setVisible(true);
     }
+    
+    private void addproducto(){
+        JF_addProducto producto=new JF_addProducto();
+        producto.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -190,13 +195,26 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         jLabel7.setText(" ");
+        jLabel7.setToolTipText("Agregar");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel8.setBackground(new java.awt.Color(217, 83, 79));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash.png"))); // NOI18N
         jLabel8.setText(" ");
+        jLabel8.setToolTipText("Eliminar");
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit.png"))); // NOI18N
         jLabel9.setText(" ");
+        jLabel9.setToolTipText("Editar");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -418,6 +436,14 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         buscarProveedor();
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        addproducto();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        editproducto();
+    }//GEN-LAST:event_jLabel9MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -495,4 +521,9 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    private void editproducto() {
+        JF_editProducto producto= new JF_editProducto();
+        producto.setVisible(true);
+    }
 }
