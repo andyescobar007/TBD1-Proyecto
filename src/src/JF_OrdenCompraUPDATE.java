@@ -409,15 +409,11 @@ public class JF_OrdenCompraUPDATE extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        buscarProveedor();
+       
     }//GEN-LAST:event_jLabel6MouseClicked
 
     
-    private void buscarProveedor(){
-        JF_getProveedor proveedor= new JF_getProveedor();
-        proveedor.setVisible(true);
-    }
-    
+ 
     /**
      * @param args the command line arguments
      */
