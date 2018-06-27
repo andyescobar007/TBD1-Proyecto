@@ -52,7 +52,7 @@ public class Database {
             if(resultset.next()){
                 resultado=1;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return resultado;
         
@@ -70,11 +70,11 @@ public class Database {
        
     }
     public void agregar2(String user,String pass) throws SQLException{
-        PreparedStatement ps=conector.prepareStatement("insert into Usuarios(username,password) values (?,?)");
-        ps.setString(1,user);
-        ps.setString(2,pass);
+        PreparedStatement prepareS=conector.prepareStatement("insert into Usuarios(username,password) values (?,?)");
+        prepareS.setString(1,user);
+        prepareS.setString(2,pass);
         
-        ps.executeUpdate();
+        prepareS.executeUpdate();
         System.out.println("USUARIO REGISTRADO");
        
     }
@@ -98,7 +98,7 @@ public class Database {
      //db.ejecutar_consulta("delete from usuarios where username = andy");
      //db.agregar("insert into Usuarios(username,password) values ('MIGUEL','supersecreto')");
      //db.agregar("delete from usuarios where username = 'andy'");
-     db.agregar2("Dcarlos","secreto");
+     //db.agregar2("Dcarlos","secreto");
     rttemp= db.ejecutar_consulta("Select * From Usuarios");
      while(rttemp.next()){
          
