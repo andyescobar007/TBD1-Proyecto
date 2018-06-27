@@ -75,6 +75,15 @@ public class Database {
        
     }
     
+    
+    private Statement getLogin(String user,String pass) throws SQLException{
+        String sql="Select * From Usuarios where username = '"+user+"' and password = '"+pass+"'";
+        statement= conector.createStatement();
+        resultset=statement.executeQuery(sql);
+        return statement;
+   
+    }
+    
     public static void main(String[] args) throws SQLException { 
      
         
