@@ -31,12 +31,9 @@ public class Database {
             PATH = "jdbc:sqlserver://;database=ProyectoOK;integratedSecurity=true;";
             conector= DriverManager.getConnection(PATH);
             System.out.println("Conectado");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("error");
             JOptionPane.showMessageDialog(null,"No se pudo conectar a la base de datos");
-            
-            
-            
         }
        
     }
@@ -94,6 +91,7 @@ public class Database {
      
         
      Database db= new Database();
+        System.out.println("base de datos conectada");
      ResultSet rttemp;
      //db.ejecutar_consulta("delete from usuarios where username = andy");
      //db.agregar("insert into Usuarios(username,password) values ('MIGUEL','supersecreto')");
