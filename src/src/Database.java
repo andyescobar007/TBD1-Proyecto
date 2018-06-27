@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,10 +31,9 @@ public class Database {
             PATH = "jdbc:sqlserver://;database=ProyectoOK;integratedSecurity=true;";
             conector= DriverManager.getConnection(PATH);
             System.out.println("Conectado");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("error");
-            e.printStackTrace();
-            
+            JOptionPane.showMessageDialog(null,"No se pudo conectar a la base de datos");
         }
        
     }
@@ -49,14 +49,15 @@ public class Database {
             if(resultset.next()){
                 resultado=1;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return resultado;
         
     }
     public ResultSet ejecutar_consulta(String sql) throws SQLException{
-        statement= conector.createStatement();
-        resultset = statement.executeQuery(sql);
+        Statement st;
+        st= conector.createStatement();
+        resultset = st.executeQuery(sql);
         return resultset;
     }
     
@@ -66,43 +67,41 @@ public class Database {
        
     }
     public void agregar2(String user,String pass) throws SQLException{
-        PreparedStatement ps=conector.prepareStatement("insert into Usuarios(username,password) values (?,?)");
-        ps.setString(1,user);
-        ps.setString(2,pass);
+        PreparedStatement prepareS=conector.prepareStatement("insert into Usuarios(username,password) values (?,?)");
+        prepareS.setString(1,user);
+        prepareS.setString(2,pass);
         
-        ps.executeUpdate();
+        prepareS.executeUpdate();
         System.out.println("USUARIO REGISTRADO");
        
     }
     
     
-    private Statement getLogin(String user,String pass) throws SQLException{
+    public Statement getLogin(String user,String pass) throws SQLException{
         String sql="Select * From Usuarios where username = '"+user+"' and password = '"+pass+"'";
         statement= conector.createStatement();
         resultset=statement.executeQuery(sql);
         return statement;
    
     }
+   
     
+    ///* 
     public static void main(String[] args) throws SQLException { 
      
         
      Database db= new Database();
+        System.out.println("base de datos conectada");
      ResultSet rttemp;
      //db.ejecutar_consulta("delete from usuarios where username = andy");
      //db.agregar("insert into Usuarios(username,password) values ('MIGUEL','supersecreto')");
      //db.agregar("delete from usuarios where username = 'andy'");
-     db.agregar2("carlos","secreto");
-     rttemp= db.ejecutar_consulta("Select * From Usuarios");
+     //db.agregar2("Dcarlos","secreto");
+    rttemp= db.ejecutar_consulta("Select * From Usuarios");
      while(rttemp.next()){
          
          System.out.println("Usuario:" +rttemp.getString(1)+ "\tPassword "+rttemp.getString(2));
-     }
-     
-        
+     }   
     }
-    
-
-    
-    
+    //*/ 
 }
