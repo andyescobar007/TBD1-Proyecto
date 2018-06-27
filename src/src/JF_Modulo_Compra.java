@@ -266,6 +266,12 @@ public class JF_Modulo_Compra extends javax.swing.JFrame {
 
     private void ltbDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ltbDocMouseClicked
         selectBotonColor(ltbDoc);
+        JF_Documento documento=new JF_Documento();
+        documento.setVisible(true);
+        
+        
+                
+                
     }//GEN-LAST:event_ltbDocMouseClicked
 
     private void ltbRCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ltbRCMouseClicked

@@ -63,11 +63,9 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="ltbRC" alignment="0" pref="189" max="32767" attributes="0"/>
                               <Component id="ltbCC" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="ltbProveedor" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ltbProducto" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ltbOC" alignment="0" pref="188" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="ltbProveedor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ltbProducto" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ltbOC" alignment="0" pref="188" max="32767" attributes="0"/>
                               <Component id="ltbAu" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <Component id="ltbDoc" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
