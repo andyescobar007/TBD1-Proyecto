@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,7 +33,9 @@ public class Database {
             System.out.println("Conectado");
         } catch (Exception e) {
             System.out.println("error");
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"No se pudo conectar a la base de datos");
+            
+            
             
         }
        
@@ -55,8 +58,9 @@ public class Database {
         
     }
     public ResultSet ejecutar_consulta(String sql) throws SQLException{
-        statement= conector.createStatement();
-        resultset = statement.executeQuery(sql);
+        Statement st;
+        st= conector.createStatement();
+        resultset = st.executeQuery(sql);
         return resultset;
     }
     
@@ -76,14 +80,16 @@ public class Database {
     }
     
     
-    private Statement getLogin(String user,String pass) throws SQLException{
+    public Statement getLogin(String user,String pass) throws SQLException{
         String sql="Select * From Usuarios where username = '"+user+"' and password = '"+pass+"'";
         statement= conector.createStatement();
         resultset=statement.executeQuery(sql);
         return statement;
    
     }
+   
     
+    ///* 
     public static void main(String[] args) throws SQLException { 
      
         
@@ -92,17 +98,12 @@ public class Database {
      //db.ejecutar_consulta("delete from usuarios where username = andy");
      //db.agregar("insert into Usuarios(username,password) values ('MIGUEL','supersecreto')");
      //db.agregar("delete from usuarios where username = 'andy'");
-     db.agregar2("carlos","secreto");
-     rttemp= db.ejecutar_consulta("Select * From Usuarios");
+     db.agregar2("Dcarlos","secreto");
+    rttemp= db.ejecutar_consulta("Select * From Usuarios");
      while(rttemp.next()){
          
          System.out.println("Usuario:" +rttemp.getString(1)+ "\tPassword "+rttemp.getString(2));
-     }
-     
-        
+     }   
     }
-    
-
-    
-    
+    //*/ 
 }

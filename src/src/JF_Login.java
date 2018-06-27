@@ -5,6 +5,9 @@
  */
 package src;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,17 +137,21 @@ public class JF_Login extends javax.swing.JFrame {
        
        
        Database db= new Database();
-       String user=txtUsername.getText().trim();
-       String pass= String.valueOf(txtPassword.getPassword());
+       String user=txtUsername.getText();
+       String pass= String.valueOf(txtPassword.toString());
        
-       if(db.logeo(user,pass)>0 && !user.equals("")&& !pass.equals("") ){
-           JOptionPane.showMessageDialog(null, "Conexión exitosa", "Éxito", JOptionPane.DEFAULT_OPTION);
-           JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
-           menuAdmin.setVisible(true);
-           this.dispose();
-       }else{ 
-          JOptionPane.showMessageDialog(null, "Error", "Fallo", JOptionPane.DEFAULT_OPTION); 
-       }
+        try {
+            if(db.getLogin(user, pass)!= null){
+                JOptionPane.showMessageDialog(null, "Conexión exitosa", "Éxito", JOptionPane.DEFAULT_OPTION);
+                JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
+                menuAdmin.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error", "Fallo", JOptionPane.DEFAULT_OPTION);
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
         
        
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
