@@ -5,6 +5,8 @@
  */
 package src;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ANDY ESCOBAR
@@ -129,9 +131,22 @@ public class JF_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameMouseClicked
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-            JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
-            menuAdmin.setVisible(true);
-            this.dispose();
+       
+       
+       Database db= new Database();
+       String user=txtUsername.getText().trim();
+       String pass= String.valueOf(txtPassword.getPassword());
+       
+       if(db.logeo(user,pass)>0 && !user.equals("")&& !pass.equals("") ){
+           JOptionPane.showMessageDialog(null, "Conexión exitosa", "Éxito", JOptionPane.DEFAULT_OPTION);
+           JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
+           menuAdmin.setVisible(true);
+           this.dispose();
+       }else{ 
+          JOptionPane.showMessageDialog(null, "Error", "Fallo", JOptionPane.DEFAULT_OPTION); 
+       }
+        
+       
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
