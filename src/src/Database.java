@@ -22,7 +22,7 @@ public class Database {
     Statement statement;
     int resultado=0;
     ResultSet resultset;
-    PreparedStatement ps=null;
+    PreparedStatement ps;
     String PATH;
     
     public Database(){
@@ -30,6 +30,9 @@ public class Database {
         try {
             PATH = "jdbc:sqlserver://;database=ProyectoOK;integratedSecurity=true;";
             conector= DriverManager.getConnection(PATH);
+            ps=null;
+            resultset=null;
+            statement=null;
             System.out.println("Conectado");
         } catch (SQLException e) {
             System.out.println("error");
@@ -77,11 +80,12 @@ public class Database {
     }
     
     
-    public Statement getLogin(String user,String pass) throws SQLException{
-        String sql="Select * From Usuarios where username = '"+user+"' and password = '"+pass+"'";
-        statement= conector.createStatement();
-        resultset=statement.executeQuery(sql);
-        return statement;
+    public ResultSet getLogin(String user,String pass) throws SQLException{
+        String sql="Select * From Usuarios where username=? and password=?";
+        PreparedStatement preparedS=conector.prepareStatement(sql);
+        preparedS.setString(1, user);
+        preparedS.setString(2, pass);
+        return preparedS.executeQuery();
    
     }
    

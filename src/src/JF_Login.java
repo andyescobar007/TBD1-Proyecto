@@ -22,6 +22,7 @@ public class JF_Login extends javax.swing.JFrame {
     public JF_Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        lblerrorlogin.setVisible(false);
     }
 
     /**
@@ -42,6 +43,7 @@ public class JF_Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnIniciarSesion = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        lblerrorlogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -107,6 +109,11 @@ public class JF_Login extends javax.swing.JFrame {
         jLabel5.setText("PASSWORD");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 250, -1));
 
+        lblerrorlogin.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        lblerrorlogin.setForeground(new java.awt.Color(255, 46, 63));
+        lblerrorlogin.setText("Usuario y/o contraseña incorrectos");
+        jPanel1.add(lblerrorlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,25 +143,24 @@ public class JF_Login extends javax.swing.JFrame {
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
 
        
-    /*   
+       
        Database db= new Database();
        String user=txtUsername.getText();
-       String pass= String.valueOf(txtPassword.toString());
+       String pass= txtPassword.getText();
        
         try {
-            if(db.getLogin(user, pass)!= null){
-                JOptionPane.showMessageDialog(null, "Conexión exitosa", "Éxito", JOptionPane.DEFAULT_OPTION);
-        */
+            if(db.getLogin(user, pass).next()){
+                lblerrorlogin.setVisible(false);
                 JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
                 menuAdmin.setVisible(true);
                 this.dispose();
-        /*    }else{
-                JOptionPane.showMessageDialog(null, "Error", "Fallo", JOptionPane.DEFAULT_OPTION);
+            }else{
+                lblerrorlogin.setVisible(true);
             }
         } catch (SQLException ex) {
             ex.getMessage();
         }
-        */
+        
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
@@ -196,6 +202,7 @@ public class JF_Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblerrorlogin;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
