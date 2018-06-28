@@ -171,11 +171,21 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("MODULO DE ALMACEN");
 
         LB_ICON_MODULO_COMPRA2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/almacen.png"))); // NOI18N
+        LB_ICON_MODULO_COMPRA2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LB_ICON_MODULO_COMPRA2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -273,6 +283,14 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         abrirModuloAlmacen();
     }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void LB_ICON_MODULO_COMPRA2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_ICON_MODULO_COMPRA2MouseClicked
+        abrirModuloAlmacen();
+    }//GEN-LAST:event_LB_ICON_MODULO_COMPRA2MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        abrirModuloAlmacen();
+    }//GEN-LAST:event_jPanel5MouseClicked
 
     
     private void abrirModuloCompra(){
