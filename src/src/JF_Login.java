@@ -7,7 +7,6 @@ package src;
 
 
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 
 /**
@@ -34,6 +33,9 @@ public class JF_Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        notificacion = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -44,6 +46,28 @@ public class JF_Login extends javax.swing.JFrame {
         btnIniciarSesion = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         lblerrorlogin = new javax.swing.JLabel();
+
+        notificacion.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        notificacion.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("BIENVENIDO");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 400, -1));
+
+        javax.swing.GroupLayout notificacionLayout = new javax.swing.GroupLayout(notificacion.getContentPane());
+        notificacion.getContentPane().setLayout(notificacionLayout);
+        notificacionLayout.setHorizontalGroup(
+            notificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        notificacionLayout.setVerticalGroup(
+            notificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -141,26 +165,7 @@ public class JF_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameMouseClicked
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-
-       
-       
-       Database db= new Database();
-       String user=txtUsername.getText();
-       String pass= txtPassword.getText();
-       
-        try {
-            if(db.getLogin(user, pass).next()){
-                lblerrorlogin.setVisible(false);
-                JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
-                menuAdmin.setVisible(true);
-                this.dispose();
-            }else{
-                lblerrorlogin.setVisible(true);
-            }
-        } catch (SQLException ex) {
-            ex.getMessage();
-        }
-        
+        iniciarSesion();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
@@ -196,14 +201,44 @@ public class JF_Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblerrorlogin;
+    private javax.swing.JDialog notificacion;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+
+    private void iniciarSesion(){
+        Database db= new Database();
+       String user=txtUsername.getText();
+       String pass= txtPassword.getText();
+       
+        try {
+            if(db.getLogin(user, pass).next()){
+                lblerrorlogin.setVisible(false);
+                JF_Menu_Administrador menuAdmin=new JF_Menu_Administrador();
+                menuAdmin.setVisible(true);
+                mostrarMensaje();
+                this.dispose();
+            }else{
+                lblerrorlogin.setVisible(true);
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        
+    }
+    
+    public void mostrarMensaje(){
+    }
+    
+    
 }
