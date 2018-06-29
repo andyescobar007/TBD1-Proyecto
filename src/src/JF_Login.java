@@ -22,6 +22,7 @@ public class JF_Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         lblerrorlogin.setVisible(false);
+        
     }
 
     /**
