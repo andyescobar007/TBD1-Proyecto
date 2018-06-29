@@ -81,8 +81,8 @@ public class Database {
     
     
     public ResultSet getLogin(String user,String pass) throws SQLException{
-       // String sql="Select * From Usuarios where username=? and password=?";
-        String sql="exec user_login ?,?";
+        String sql="Select * From Usuarios where username=? and password=?";
+        //String sql="exec user_login ?,?";
         PreparedStatement preparedS=conector.prepareStatement(sql);
         preparedS.setString(1, user);
         preparedS.setString(2, pass);
