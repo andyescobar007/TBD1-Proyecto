@@ -22,6 +22,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
+        
     }
     
     
