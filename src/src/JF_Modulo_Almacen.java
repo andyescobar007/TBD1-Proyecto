@@ -300,19 +300,18 @@ public class JF_Modulo_Almacen extends javax.swing.JFrame {
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
         colorSelected(btnReportes);
-        cambiarpanel(pnl1);
         
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void btnMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMovimientosMouseClicked
         colorSelected(btnMovimientos);
-        cambiarpanel(pnl2);
     }//GEN-LAST:event_btnMovimientosMouseClicked
 
     private void btnEquivalenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEquivalenciasMouseClicked
         colorSelected(btnEquivalencias);
         cambiarpanel(pnl2);
-       
+        
+        
     }//GEN-LAST:event_btnEquivalenciasMouseClicked
 
     
