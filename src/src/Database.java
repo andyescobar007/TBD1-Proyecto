@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -79,6 +81,23 @@ public class Database {
        
     }
     
+    public void registrarProveedor(String dir,String rs,String cont,String tel,int act){
+        try {
+            PreparedStatement prepareS=conector.prepareStatement("sp_insertarproveedor ?,?,?,?,?");
+            prepareS.setString(1,dir);
+            prepareS.setString(2,rs);
+            prepareS.setString(3,cont);
+            prepareS.setString(4,tel);
+            prepareS.setInt(5,act);
+            
+            prepareS.executeUpdate();
+            System.out.println("USUARIO REGISTRADO");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+    
     
     public ResultSet getLogin(String user,String pass) throws SQLException{
         String sql="Select * From Usuarios where username=? and password=?";
@@ -88,6 +107,22 @@ public class Database {
         preparedS.setString(2, pass);
         return preparedS.executeQuery();
    
+    }
+    
+    public int getIDProveedor(){
+        int cod=0;
+        try {
+            String sql="exec obtenersecuenciaproveedor;";
+            //String sql="exec user_login ?,?";
+            PreparedStatement preparedS=conector.prepareStatement(sql);
+            resultset=preparedS.executeQuery();
+            if(resultset.next()){
+                cod= Integer.valueOf(resultset.getString(1)); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cod ;
     }
    
     

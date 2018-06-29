@@ -5,11 +5,14 @@
  */
 package src;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author ANDY ESCOBAR
  */
 public class JF_ProveedorADD extends javax.swing.JFrame {
+    Database database=new Database();
 
     /**
      * Creates new form JF_ProveedorADD
@@ -17,6 +20,8 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
     public JF_ProveedorADD() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        jLabel2.setText(String.valueOf(database.getIDProveedor()+1));
     }
 
     /**
@@ -28,6 +33,7 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -90,9 +96,11 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
         jPanel3.setToolTipText("");
 
         rbInactivo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbInactivo);
         rbInactivo.setText("Inactivo");
 
         rbActivo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbActivo);
         rbActivo.setText("Activo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -217,6 +225,11 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("GUARDAR");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -341,6 +354,10 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        registrarProveedor();
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -378,6 +395,7 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -394,14 +412,37 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JRadioButton rbActivo;
+    private javax.swing.JRadioButton rbActivo1;
+    private javax.swing.JRadioButton rbActivo2;
+    private javax.swing.JRadioButton rbActivo3;
     private javax.swing.JRadioButton rbInactivo;
+    private javax.swing.JRadioButton rbInactivo1;
+    private javax.swing.JRadioButton rbInactivo2;
+    private javax.swing.JRadioButton rbInactivo3;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtContacto;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtRazonSocial;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+    private void registrarProveedor(){
+        String razonSocial=txtRazonSocial.getText();
+        String ciudad=txtCiudad.getText();
+        String telefono=txtTelefono.getText();
+        String cont=txtContacto.getText();
+        String direccion=txtDireccion.getText();
+        String tipo=cmbTipo.getSelectedItem().toString();
+        int activo=rbActivo.isSelected()?1:0;
+        database.registrarProveedor(ciudad, razonSocial,cont,telefono, activo);
+    }
+
+
 }
+
+
