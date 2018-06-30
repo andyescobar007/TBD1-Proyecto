@@ -81,14 +81,17 @@ public class Database {
        
     }
     
-    public void registrarProveedor(String dir,String rs,String cont,String tel,int act){
+    public void registrarProveedor(String rs,String dir,String cuid,String tel,String cont,String tipo,int act){
         try {
-            PreparedStatement prepareS=conector.prepareStatement("sp_insertarproveedor ?,?,?,?,?");
-            prepareS.setString(1,dir);
-            prepareS.setString(2,rs);
-            prepareS.setString(3,cont);
+            PreparedStatement prepareS=conector.prepareStatement("sp_insertarproveedor ?,?,?,?,?,?,?");
+            prepareS.setString(1,rs);
+            prepareS.setString(2,dir);
+            prepareS.setString(3,cuid);
             prepareS.setString(4,tel);
-            prepareS.setInt(5,act);
+            prepareS.setString(5,cont);
+            prepareS.setString(6,tipo);
+            prepareS.setInt(7,act);
+            
             
             prepareS.executeUpdate();
             System.out.println("USUARIO REGISTRADO");
@@ -117,12 +120,28 @@ public class Database {
             PreparedStatement preparedS=conector.prepareStatement(sql);
             resultset=preparedS.executeQuery();
             if(resultset.next()){
-                cod= Integer.valueOf(resultset.getString(1)); 
+                cod = resultset.getInt(1); 
+            }else{
+                sql="ALTER SEQUENCE sec_proveedores RESTART WITH 1";
+                preparedS=conector.prepareStatement(sql);
+                resultset=preparedS.executeQuery();
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cod ;
+    }
+    
+    public ResultSet getProveedores(){
+        resultset=null;
+        try {
+            PreparedStatement preparedS=conector.prepareStatement("SELECT * FROM Proveedor");
+            resultset=preparedS.executeQuery();
+            return resultset;
+        } catch (SQLException ex) {
+           Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultset;
     }
    
     

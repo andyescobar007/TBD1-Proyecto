@@ -5,8 +5,6 @@
  */
 package src;
 
-import java.sql.SQLException;
-
 /**
  *
  * @author ANDY ESCOBAR
@@ -22,6 +20,7 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         jLabel2.setText(String.valueOf(database.getIDProveedor()+1));
+        
     }
 
     /**
@@ -433,13 +432,14 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private void registrarProveedor(){
         String razonSocial=txtRazonSocial.getText();
+        String direccion=txtDireccion.getText();
         String ciudad=txtCiudad.getText();
         String telefono=txtTelefono.getText();
         String cont=txtContacto.getText();
-        String direccion=txtDireccion.getText();
         String tipo=cmbTipo.getSelectedItem().toString();
         int activo=rbActivo.isSelected()?1:0;
-        database.registrarProveedor(ciudad, razonSocial,cont,telefono, activo);
+        database.registrarProveedor( razonSocial,direccion,ciudad,telefono,cont,tipo, activo);
+        this.dispose();
     }
 
 

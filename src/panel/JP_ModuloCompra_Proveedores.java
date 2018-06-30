@@ -5,9 +5,13 @@
  */
 package panel;
 
-import java.awt.BorderLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import src.Database;
 import src.JF_ProveedorADD;
 import src.JF_ProveedorUPDATE;
 
@@ -17,13 +21,17 @@ import src.JF_ProveedorUPDATE;
  */
 public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
 
+    Database database=new Database();
+    JF_ProveedorADD pADDProveedor=new JF_ProveedorADD();
     /**
      * Creates new form JP_ModuloCompra_Admin_Proveedores
      */
     public JP_ModuloCompra_Proveedores() {
         initComponents();
+        mostrarProveedores();
     }
-
+    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,8 +184,8 @@ public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarProveedor(){
-        JF_ProveedorADD pADDProveedor=new JF_ProveedorADD();
        pADDProveedor.setVisible(true);
+       
         
     }
     
@@ -223,4 +231,22 @@ public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+      private void mostrarProveedores(){
+        
+            DefaultTableModel model=new DefaultTableModel();
+            model.setColumnIdentifiers(new Object[]{"ID_PROVEEDOR","PROVEEDOR","DIRECCION","CIUDAD","TELEFONO","CONTACTO","TIPO","ESTADO"});
+            ResultSet rs=database.getProveedores();
+           try {
+                while(rs.next()){
+                    model.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),
+                    rs.getString(7),(rs.getInt(8)==1?"Activo":"Inactivo")});
+                }
+                jTable1.setModel(model);
+           } catch (SQLException ex) {
+                System.err.println(ex);
+                
+            }
+        
+      }
 }
