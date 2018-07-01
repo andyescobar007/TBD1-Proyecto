@@ -145,6 +145,17 @@ public class Database {
         }
         return resultset;
     }
+     public ResultSet getProductos_Almacen(){
+        resultset=null;
+        try {
+            PreparedStatement preparedS=conector.prepareStatement("SELECT * FROM Productos_Almacen");
+            resultset=preparedS.executeQuery();
+            return resultset;
+        } catch (SQLException ex) {
+           
+        }
+        return resultset;
+    }
     
     public void deleteProveedor(int cod){
         try {
