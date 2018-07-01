@@ -5,6 +5,12 @@
  */
 package src;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ANDY ESCOBAR
@@ -14,8 +20,17 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
     /**
      * Creates new form JF_Productos_Compra
      */
+    Database database;
     public JF_Productos_CompraADD() {
+        
         initComponents();
+        
+        database=new Database();
+        cmbUnidadMedida.removeAllItems();
+        mostrarUnidadMedida();
+        mostrarItemLinea();
+        mostrarProductosCompra();
+        txtCodigo.setText(String.valueOf(database.getIDProductoCompra()));
         this.setLocationRelativeTo(null);
     }
 
@@ -34,15 +49,15 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cmbLinea = new javax.swing.JComboBox<>();
+        cmbTipo = new javax.swing.JComboBox<>();
+        txtCodigo = new javax.swing.JTextField();
+        ckeckActivo = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbUnidadMedida = new javax.swing.JComboBox<>();
         jTextField2 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -72,19 +87,23 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Tipo");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbLinea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLineaActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField1.setEditable(false);
+        txtCodigo.setEditable(false);
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setText("Activo");
-        jCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jCheckBox1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        ckeckActivo.setBackground(new java.awt.Color(255, 255, 255));
+        ckeckActivo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ckeckActivo.setText("Activo");
+        ckeckActivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ckeckActivo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,16 +116,16 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbLinea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(14, 14, 14)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ckeckActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -115,16 +134,16 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jCheckBox1))
+                    .addComponent(ckeckActivo))
                 .addContainerGap())
         );
 
@@ -145,10 +164,15 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
         jCheckBox2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jCheckBox2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbUnidadMedida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbUnidadMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -168,7 +192,7 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox3, 0, 161, Short.MAX_VALUE)))
+                        .addComponent(cmbUnidadMedida, 0, 161, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -181,7 +205,7 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
                 .addComponent(jCheckBox2)
                 .addContainerGap())
@@ -277,6 +301,11 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("GUARDAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -326,8 +355,21 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLineaActionPerformed
+       mostrarItemProducto();  
+    }//GEN-LAST:event_cmbLineaActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        registrarProducto();
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,14 +410,14 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox ckeckActivo;
+    private javax.swing.JComboBox<String> cmbLinea;
+    private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JComboBox<String> cmbUnidadMedida;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -390,7 +432,77 @@ public class JF_Productos_CompraADD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
+
+  
+    
+    private void mostrarItemLinea(){
+      
+        try {
+            
+            ResultSet rs=database.getLineaProducto();
+            while(rs.next()){
+                cmbLinea.addItem(rs.getString(1));     
+            }
+             } catch (SQLException ex) {
+            //Logger.getLogger(JF_Productos_CompraADD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void mostrarItemProducto(){
+        cmbTipo.removeAllItems();
+        try {
+            ResultSet rs=database.getTipoProducto(cmbLinea.getSelectedItem().toString());
+            while(rs.next()){
+                cmbTipo.addItem(rs.getString(1));     
+            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(JF_Productos_CompraADD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    private void mostrarUnidadMedida(){
+        ResultSet rs=null;
+        try {
+            
+            rs=database.ejecutar_consulta("Select * from unidad_medida");
+            while(rs.next()){
+                cmbUnidadMedida.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(JF_Productos_CompraADD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void registrarProducto(){
+        String linea,tipo,descripcion,destino,unidadMedida;
+        int centroCosto,active;
+        centroCosto=jCheckBox2.isSelected()?1:0;
+        linea=cmbLinea.getSelectedItem().toString();
+        tipo=cmbTipo.getSelectedItem().toString();
+        active=ckeckActivo.isSelected()?1:0;
+        descripcion=jTextField2.getText();
+        unidadMedida=cmbUnidadMedida.getSelectedItem().toString();
+        destino=jCheckBox3.isSelected()?"Compra":"Venta";
+        database.registrarProductoCompra(linea, tipo, active, descripcion, centroCosto, unidadMedida, destino);
+
+    }
+    private void mostrarProductosCompra(){
+        try {
+            DefaultTableModel model=new DefaultTableModel();
+            model.setColumnIdentifiers(new Object[]{"ID_PRODUCTO","DESCRIPCION"});
+            ResultSet rs=database.ejecutar_consulta("SELECT * FROM Producto_compra");
+            while(rs.next()){
+                System.out.println(rs.getString(2));
+                model.addRow(new Object[]{rs.getInt(1),rs.getString(4)});
+            }
+            jTable1.setModel(model);
+        } catch (SQLException ex) {
+           // Logger.getLogger(JF_Productos_CompraADD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+    }
+    
 }

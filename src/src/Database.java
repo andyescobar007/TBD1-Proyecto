@@ -155,7 +155,72 @@ public class Database {
             
         }
     }
+    
+    
+    
+     public ResultSet getLineaProducto(){
+        String sql="Select * From Linea";
+        PreparedStatement preparedS=null;
+        ResultSet result=null;
+        try {
+            preparedS=conector.prepareStatement(sql);
+            result=preparedS.executeQuery();
+        } catch (SQLException ex) {
+            
+        }
+        return result;
    
+    }
+     
+     public ResultSet getTipoProducto(String tipo){
+        String sql="exec getTipo ?";
+        PreparedStatement preparedS=null;
+        ResultSet result=null;
+        try {
+            preparedS=conector.prepareStatement(sql);
+            preparedS.setString(1, tipo);
+            result=preparedS.executeQuery();
+        } catch (SQLException ex) {
+            
+        }
+        return result;
+   
+    }
+     
+     
+    public int getIDProductoCompra(){
+        ResultSet resultset=null;
+        int cont=0;
+        try {
+            resultset=ejecutar_consulta("Select MAX(codigo_producto) from Producto_compra");
+            if(resultset.next()){
+                cont=resultset.getInt(1);
+            }
+           } catch (SQLException ex) {
+        }
+        return cont+1;
+    }
+   
+    public void registrarProductoCompra(String Lin,String tipo,int act,String des,
+            int centroCost,String unidadM,String Destino){
+
+        try {
+            ps=conector.prepareStatement("exec sp_insertar_productocompra ?,?,?,?,?,?,?");
+            ps.setString(1, Lin);
+            ps.setString(2, tipo);
+            ps.setInt(3, act);
+            ps.setString(4, des);
+            ps.setInt(5, centroCost);
+            ps.setString(6, unidadM);
+            ps.setString(7, Destino);
+            ps.executeUpdate();
+            System.out.println("producto registrado");
+            
+        } catch (SQLException ex) {
+            //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
     ///* 
     public static void main(String[] args) throws SQLException { 
