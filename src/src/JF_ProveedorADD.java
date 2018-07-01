@@ -5,20 +5,25 @@
  */
 package src;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ANDY ESCOBAR
  */
 public class JF_ProveedorADD extends javax.swing.JFrame {
-    Database database=new Database();
+    Database database;
 
     /**
      * Creates new form JF_ProveedorADD
      */
     public JF_ProveedorADD() {
         initComponents();
+        database=new Database();
         this.setLocationRelativeTo(null);
-        
+        mostrarProveedores();
         jLabel2.setText(String.valueOf(database.getIDProveedor()+1));
         
     }
@@ -440,6 +445,22 @@ public class JF_ProveedorADD extends javax.swing.JFrame {
         int activo=rbActivo.isSelected()?1:0;
         database.registrarProveedor( razonSocial,direccion,ciudad,telefono,cont,tipo, activo);
         this.dispose();
+    }
+    
+    private void mostrarProveedores(){
+
+          DefaultTableModel model=new DefaultTableModel();
+          model.setColumnIdentifiers(new Object[]{"ID_PROVEEDOR","PROVEEDOR"});
+          ResultSet rs=database.getProveedores();
+         try {
+              while(rs.next()){
+                  model.addRow(new Object[]{rs.getInt(1),rs.getString(2)});
+              }
+              jTable1.setModel(model);
+         } catch (SQLException ex) {
+              System.err.println(ex);
+
+          }
     }
 
 

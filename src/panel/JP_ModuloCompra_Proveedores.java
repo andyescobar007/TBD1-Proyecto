@@ -7,8 +7,6 @@ package panel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.Database;
@@ -189,8 +187,9 @@ public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
         
     }
     
-    private void updateProveedor(){
+    private void updateProveedor(int codigo, String rs, String dir, String cui, String telefono, String contacto, String tipo, boolean act){
         JF_ProveedorUPDATE pUPDATEProveedor=new JF_ProveedorUPDATE();
+        pUPDATEProveedor.cargarDatos(codigo, rs, dir, cui, telefono, contacto, tipo, act);
         pUPDATEProveedor.setVisible(true);
     }
     
@@ -210,11 +209,11 @@ public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        updateProveedor();
+        actualizarProveedor();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        conectToDB();
+        eliminarProveedores();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     
@@ -232,21 +231,56 @@ public class JP_ModuloCompra_Proveedores extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-      private void mostrarProveedores(){
+    private void mostrarProveedores(){
+
+          DefaultTableModel model=new DefaultTableModel();
+          model.setColumnIdentifiers(new Object[]{"ID_PROVEEDOR","PROVEEDOR","DIRECCION","CIUDAD","TELEFONO","CONTACTO","TIPO","ESTADO"});
+          ResultSet rs=database.getProveedores();
+         try {
+              while(rs.next()){
+                  model.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),
+                  rs.getString(7),(rs.getInt(8)==1?"Activo":"Inactivo")});
+              }
+              jTable1.setModel(model);
+         } catch (SQLException ex) {
+              System.err.println(ex);
+
+          }
+    }
+    
+    
+    private void eliminarProveedores(){
+        int filaselect=jTable1.getSelectedRow();
+        int codigo;
+        if(filaselect==-1){
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione la fila a eliminar");
+        }else{
+            codigo=Integer.valueOf(jTable1.getValueAt(filaselect,0).toString());
+            database.deleteProveedor(codigo);
+            mostrarProveedores();
+            JOptionPane.showMessageDialog(null, "Registro eliminado correctamente");
+        }
+    }
+    
+    private void actualizarProveedor(){
+        String tipo,rs,dir, cui,telefono,contacto;
+        boolean act;
+        int filaselect=jTable1.getSelectedRow();
+        int codigo;
+        if(filaselect==-1){
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione la fila a actualizar");
+        }else{
+            codigo=Integer.valueOf(jTable1.getValueAt(filaselect,0).toString());
+            rs=jTable1.getValueAt(filaselect,1).toString();
+            dir=jTable1.getValueAt(filaselect,2).toString();
+            cui=jTable1.getValueAt(filaselect,3).toString();
+            telefono=jTable1.getValueAt(filaselect,4).toString();
+            contacto=jTable1.getValueAt(filaselect,5).toString();
+            tipo=jTable1.getValueAt(filaselect,6).toString();
+            boolean tempBoolean=jTable1.getValueAt(filaselect,7).toString().equalsIgnoreCase("Activo");
+            act=tempBoolean; 
+            updateProveedor(codigo,rs,dir,cui,telefono,contacto,tipo,act);
+        }
         
-            DefaultTableModel model=new DefaultTableModel();
-            model.setColumnIdentifiers(new Object[]{"ID_PROVEEDOR","PROVEEDOR","DIRECCION","CIUDAD","TELEFONO","CONTACTO","TIPO","ESTADO"});
-            ResultSet rs=database.getProveedores();
-           try {
-                while(rs.next()){
-                    model.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),
-                    rs.getString(7),(rs.getInt(8)==1?"Activo":"Inactivo")});
-                }
-                jTable1.setModel(model);
-           } catch (SQLException ex) {
-                System.err.println(ex);
-                
-            }
-        
-      }
+    }
 }

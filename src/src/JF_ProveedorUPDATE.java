@@ -5,6 +5,11 @@
  */
 package src;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ANDY ESCOBAR
@@ -14,7 +19,9 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
     /**
      * Creates new form JF_ProveedoresUPDATE
      */
+    Database database;
     public JF_ProveedorUPDATE() {
+        database=new Database();
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -28,10 +35,11 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -65,8 +73,8 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Código");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCodigo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Razón Social");
@@ -88,9 +96,11 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
         jPanel5.setToolTipText("");
 
         rbInactivo1.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbInactivo1);
         rbInactivo1.setText("Inactivo");
 
         rbActivo1.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbActivo1);
         rbActivo1.setText("Activo");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -162,7 +172,7 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRazonSocial1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDireccion1)
                             .addComponent(txtCiudad1)
                             .addComponent(txtContacto1)
@@ -178,7 +188,7 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -215,6 +225,11 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("GUARDAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -273,7 +288,7 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtRazonSocial1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRazonSocial1ActionPerformed
@@ -283,6 +298,10 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
     private void cmbTipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipo1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        actualizarProveedorDB();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,9 +341,9 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbTipo1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -340,9 +359,52 @@ public class JF_ProveedorUPDATE extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbActivo1;
     private javax.swing.JRadioButton rbInactivo1;
     private javax.swing.JTextField txtCiudad1;
+    private javax.swing.JLabel txtCodigo;
     private javax.swing.JTextField txtContacto1;
     private javax.swing.JTextField txtDireccion1;
     private javax.swing.JTextField txtRazonSocial1;
     private javax.swing.JTextField txtTelefono1;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarDatos(int num,String rs,String dir,String city,String tel,String cont,String tipo,boolean act){
+        txtCodigo.setText(String.valueOf(num));
+        txtRazonSocial1.setText(rs);
+        txtDireccion1.setText(dir);
+        txtCiudad1.setText(city);
+        txtTelefono1.setText(tel);
+        txtContacto1.setText(cont);
+        cmbTipo1.setSelectedItem(tipo);
+        rbActivo1.setSelected(act);
+        
+    }
+    
+    
+    public void actualizarProveedorDB(){
+        String rs,dir,ciu,tel,cont,tipo;
+            int act;
+            int cod=Integer.valueOf(txtCodigo.getText());
+            rs=txtRazonSocial1.getText();
+            dir=txtDireccion1.getText();
+            ciu=txtCiudad1.getText();
+            tel=txtTelefono1.getText();
+            cont=txtContacto1.getText();
+            tipo=cmbTipo1.getSelectedItem().toString();
+            act=rbActivo1.isSelected()?1:0;
+        try {    
+            PreparedStatement prepareS=database.conector.prepareStatement("sp_updateProveedor ?,?,?,?,?,?,?,?");
+            prepareS.setInt(1, cod);
+            prepareS.setString(2,rs);
+            prepareS.setString(3,dir);
+            prepareS.setString(4,ciu);
+            prepareS.setString(5,tel);
+            prepareS.setString(6,cont);
+            prepareS.setString(7,tipo);
+            prepareS.setInt(8,act);
+            prepareS.executeUpdate();
+            System.out.println("Proveedor acutalizado");
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(JF_ProveedorUPDATE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -112,6 +112,7 @@ public class Database {
    
     }
     
+    
     public int getIDProveedor(){
         int cod=0;
         try {
@@ -121,13 +122,14 @@ public class Database {
             resultset=preparedS.executeQuery();
             if(resultset.next()){
                 cod = resultset.getInt(1); 
-            }else{
-                sql="ALTER SEQUENCE sec_proveedores RESTART WITH 1";
+            } 
+            if(cod==0){
+                sql="exec resetSQ_Proveedor";
                 preparedS=conector.prepareStatement(sql);
-                resultset=preparedS.executeQuery();
+                preparedS.executeQuery();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cod ;
     }
@@ -139,9 +141,19 @@ public class Database {
             resultset=preparedS.executeQuery();
             return resultset;
         } catch (SQLException ex) {
-           Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+           //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultset;
+    }
+    
+    public void deleteProveedor(int cod){
+        try {
+            ps=conector.prepareStatement("exec sp_borrar_proveedores ?");
+            ps.setInt(1, cod);
+            resultset=ps.executeQuery();
+        } catch (SQLException ex) {
+            
+        }
     }
    
     
