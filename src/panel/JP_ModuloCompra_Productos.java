@@ -5,9 +5,13 @@
  */
 package panel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import src.JF_OrdenCompraADD;
-import src.JF_OrdenCompraUPDATE;
+import javax.swing.table.DefaultTableModel;
+import src.Database;
 import src.JF_Productos_CompraADD;
 import src.JF_Productos_CompraUPDATE;
 
@@ -16,12 +20,16 @@ import src.JF_Productos_CompraUPDATE;
  * @author ANDY ESCOBAR
  */
 public class JP_ModuloCompra_Productos extends javax.swing.JPanel {
+    
+    Database database;
 
     /**
      * Creates new form JP_ModuloCompra_Productos
      */
     public JP_ModuloCompra_Productos() {
+        database=new Database();
         initComponents();
+        mostrarProductos();
     }
 
     /**
@@ -176,7 +184,7 @@ public class JP_ModuloCompra_Productos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        conectToDB();
+        deleteProducto();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void addProducto(){
@@ -188,6 +196,20 @@ public class JP_ModuloCompra_Productos extends javax.swing.JPanel {
     private void updateProducto(){
         JF_Productos_CompraUPDATE producto=new JF_Productos_CompraUPDATE();
         producto.setVisible(true);
+    
+    }
+    
+    private void deleteProducto(){
+        int filaselect=jTable1.getSelectedRow();
+        int codigo;
+        if(filaselect==-1){
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione la fila a eliminar");
+        }else{
+            codigo=Integer.valueOf(jTable1.getValueAt(filaselect,0).toString());
+            database.deleteProductoCompra(codigo);
+            mostrarProductos();
+            JOptionPane.showMessageDialog(null, "Registro eliminado correctamente");
+        }
     
     }
    
@@ -207,4 +229,33 @@ public class JP_ModuloCompra_Productos extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrarProductos(){
+        DefaultTableModel model=new DefaultTableModel();
+          model.setColumnIdentifiers(new Object[]{"COD_PRODUCTO","CENTRO DE COSTO","ACTIVO","DESCRIPCION","UNIDAD DE MEDIDA"
+                  ,"DESTINO","TIPO DE PRODUCTO","LINEA"});
+          
+         try {
+             ResultSet rs=database.ejecutar_consulta("Select * from producto_compra");
+              while(rs.next()){
+                  model.addRow(new Object[]
+                  {
+                      rs.getInt(1),
+                     rs.getInt(2)==1?"SI":"NO",
+                      rs.getInt(3)==1?"ACTIVO":"INACTIVO",
+                      rs.getString(4),
+                      rs.getString(5),
+                      rs.getString(6),
+                      rs.getString(7),
+                      rs.getString(8)
+                  });
+              }
+              jTable1.setModel(model);
+         } catch (SQLException ex) {
+              System.err.println(ex);
+
+          }
+    
+    
+    }
 }

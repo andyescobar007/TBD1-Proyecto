@@ -251,4 +251,14 @@ public class Database {
      }   
     }
     //*/ 
+
+    public void deleteProductoCompra(int codigo) {
+        try {
+            ps=conector.prepareStatement("exec sp_borrar_productoscompra ?");
+            ps.setInt(1, codigo);
+            resultset=ps.executeQuery();
+        } catch (SQLException ex) {
+            
+        }
+    }
 }
