@@ -261,4 +261,20 @@ public class Database {
             
         }
     }
+    
+    public ResultSet buscarProveedor(String proveedor){
+        String sql="exec sp_buscarProveedor ?";
+        PreparedStatement preparedS=null;
+        ResultSet result=null;
+        try {
+            preparedS=conector.prepareStatement(sql);
+            preparedS.setString(1, proveedor);
+            result=preparedS.executeQuery();
+        } catch (SQLException ex) {
+            
+        }
+        return result;
+    }
 }
+    
+    
