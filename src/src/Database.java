@@ -275,6 +275,19 @@ public class Database {
         }
         return result;
     }
+    
+    public int getIDOrdenCompra(){
+        ResultSet resultset=null;
+        int cont=0;
+        try {
+            resultset=ejecutar_consulta("Select MAX(codigo_producto) from orden_compra");
+            if(resultset.next()){
+                cont=resultset.getInt(1);
+            }
+           } catch (SQLException ex) {
+        }
+        return cont+1;
+    }
 }
     
     

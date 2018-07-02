@@ -5,8 +5,14 @@
  */
 package src;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -18,13 +24,15 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     /**
      * Creates new form JF_OrdenCompraADD
      */
+    double cantidad,descuento,precio,total,tdescuento,ISV;
     
     Database database;
-     String title;
+     String title,Producto,codigoProducto,producto,unidadmedida,fecha;
      int codigoProveedor;
     public JF_OrdenCompraADD() {
         initComponents();
         database=new Database();
+        jTextField1.setText(String.valueOf(database.getIDOrdenCompra()));
         this.setLocationRelativeTo(null);
         
     }
@@ -801,14 +809,14 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         });
         jPanel3.add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 13, 390, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7 dias", "15 dias", "1 Meses" }));
         jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Codicion de Pago");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DOLARES", "LEMPIRAS" }));
         jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 120, -1));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 255));
@@ -1088,6 +1096,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         addproducto();
+        mostrarProducto();
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void lblEditIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditIconMouseClicked
@@ -1315,6 +1324,33 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
        
     }
     
+    private void mostrarProducto(){
+         
+        DefaultTableModel model=new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"CODIGO_PRODUCTO","DESCRIPCION"});
+       
+        try {
+             ResultSet rs=database.ejecutar_consulta("Select * from Producto_compra;");
+            while(rs.next()){
+                model.addRow(new Object[]{rs.getInt(1),rs.getString(4)});
+            }
+            jTable3.setModel(model);
+
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+
+        }
+
+}
+    
+    
+    
+    
+    
+    
+    //////////////////////////////////////////////////////////////////////////
+    
     private void mostrarProveedor(){
         txtBuscar.setText("");
         searchProveedor.setSize(searchProveedor.getPreferredSize());
@@ -1360,6 +1396,30 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
             codigoProveedor=Integer.valueOf(jTable2.getValueAt(filaselect,0).toString());
             txtProveedor.setText(jTable2.getValueAt(filaselect,1).toString());
             JOptionPane.showMessageDialog(null, "Registro agregado correctamente");
+        }
+    }
+    
+    public void addOrdenCompra(){
+        try {
+            PreparedStatement preparedS=null;
+            preparedS= database.conector.prepareStatement("exec sp_insertar_ordencompra ?,?,?,?,?,?");
+            preparedS.setInt(1,Integer.valueOf(jTextField1.getText()));
+            preparedS.setString(2,jComboBox1.getSelectedItem().toString());
+            long DateFormatSimplefecha;
+            SimpleDateFormat format=new SimpleDateFormat("mm/dd/yyyy");
+            Date date=null;
+            try {
+                date=(Date) format.parse(fecha);
+            } catch (ParseException ex) {
+                //Logger.getLogger(JF_OrdenCompraADD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            preparedS.setDate(3, date);
+            preparedS.setString(4, jTextField3.getText());
+            preparedS.setDouble(5, total);
+            preparedS.setDouble(6, descuento);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(JF_OrdenCompraADD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
