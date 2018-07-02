@@ -290,4 +290,18 @@ public class Database {
         return cont+1;
     }
 
+    ResultSet buscarProducto(String text) {
+         String sql="exec sp_buscarProveedor ?";
+        PreparedStatement preparedS=null;
+        ResultSet result=null;
+        try {
+            preparedS=conector.prepareStatement(sql);
+            preparedS.setString(1, text);
+            result=preparedS.executeQuery();
+        } catch (SQLException ex) {
+            
+        }
+        return result;
+    }
+
 }

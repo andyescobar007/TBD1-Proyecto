@@ -31,7 +31,9 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     public JF_OrdenCompraADD() {
         initComponents();
         database=new Database();
-        jTextField1.setText(String.valueOf(database.getIDOrdenCompra()));        
+       
+        jTextField1.setText(String.valueOf(database.getIDOrdenCompra()));
+        
     }
     
     
@@ -58,6 +60,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         addProducto = new javax.swing.JFrame();
         jPanel11 = new javax.swing.JPanel();
@@ -194,20 +197,31 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
 
         txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jButton6.setText("BUSCAR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
                 .addContainerGap())
         );
 
@@ -1075,8 +1089,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEditIconMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        title=txtBuscar.getText();
-        this.txtProveedor.setText(title);
+        getProveedor();
         searchProveedor.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1128,6 +1141,10 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        buscarProveedor(txtBuscar.getText());
+    }//GEN-LAST:event_jButton6ActionPerformed
+            
     /**
      * @param args the command line arguments
      */
@@ -1171,6 +1188,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -1293,8 +1311,13 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
             System.err.println(ex);
 
         }
-
-}
+    }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1307,9 +1330,39 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         txtBuscar.setText("");
         searchProveedor.setSize(searchProveedor.getPreferredSize());
         searchProveedor.setLocationRelativeTo(null);
-        searchProveedor.setVisible(true); 
+        searchProveedor.setVisible(true);
+        mostrarProveedorTable();
     }
     
+        private void buscarProveedor(String proveedor){
+        DefaultTableModel model=new DefaultTableModel();
+          model.setColumnIdentifiers(new Object[]{"ID_PROVEEDOR","PROVEEDOR"});
+          ResultSet rs=database.buscarProveedor(proveedor);
+         try {
+              while(rs.next()){
+                  model.addRow(new Object[]{rs.getInt(1),rs.getString(2)});
+              }
+              jTable2.setModel(model);
+         } catch (SQLException ex) {
+              System.err.println(ex);
+
+        }
+    }
+    
+    private void mostrarProveedorTable(){
+         DefaultTableModel model=new DefaultTableModel();
+          model.setColumnIdentifiers(new Object[]{"ID_PROVEEDOR","PROVEEDOR"});
+          ResultSet rs=database.getProveedores();
+         try {
+              while(rs.next()){
+                  model.addRow(new Object[]{rs.getInt(1),rs.getString(2)});
+              }
+              jTable2.setModel(model);
+         } catch (SQLException ex) {
+              System.err.println(ex);
+
+          }
+    }
 
     public void getProveedor(){
         int filaselect=jTable2.getSelectedRow();
