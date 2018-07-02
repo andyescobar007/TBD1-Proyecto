@@ -18,7 +18,7 @@ public class Atencion_OrdenPedido_Ventas extends javax.swing.JFrame {
     public Atencion_OrdenPedido_Ventas() {
         database=new Database();
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);     
     }
 
     /**
