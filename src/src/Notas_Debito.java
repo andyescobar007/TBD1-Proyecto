@@ -181,7 +181,7 @@ public class Notas_Debito extends javax.swing.JFrame {
 
         jLabel8.setText("Tipo de doc");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FACTURA", "LETRAS", "ANTICIPOS", "BOLETAS" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FACTURA" }));
 
         jLabel9.setText("Número");
 
