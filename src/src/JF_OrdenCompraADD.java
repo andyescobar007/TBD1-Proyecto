@@ -5,7 +5,6 @@
  */
 package src;
 
-<<<<<<< HEAD
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-=======
-import java.awt.Component;
-import java.util.HashSet;
->>>>>>> master
-/**
- *
- * @author ANDY ESCOBAR
- */
+
+
 public class JF_OrdenCompraADD extends javax.swing.JFrame {
 
     /**
@@ -31,21 +24,14 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
      */
     double cantidad,descuento,precio,total,tdescuento,ISV;
     
-<<<<<<< HEAD
+
     Database database;
      String title,Producto,codigoProducto,producto,unidadmedida,fecha;
      int codigoProveedor;
     public JF_OrdenCompraADD() {
         initComponents();
         database=new Database();
-        jTextField1.setText(String.valueOf(database.getIDOrdenCompra()));
-=======
-     String title;
-    public JF_OrdenCompraADD() {
-        initComponents();
->>>>>>> master
-        this.setLocationRelativeTo(null);
-        
+        jTextField1.setText(String.valueOf(database.getIDOrdenCompra()));        
     }
     
     
@@ -130,7 +116,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtProveedor = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -790,10 +776,10 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         jLabel4.setText("Proveedor");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 13, 390, -1));
+        txtProveedor.setEditable(false);
+        txtProveedor.setBackground(new java.awt.Color(255, 255, 255));
+        txtProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel3.add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 13, 390, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7 dias", "15 dias", "1 Meses" }));
         jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 150, -1));
@@ -1090,7 +1076,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         title=txtBuscar.getText();
-        this.jTextField2.setText(title);
+        this.txtProveedor.setText(title);
         searchProveedor.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1263,7 +1249,6 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -1274,6 +1259,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
     private javax.swing.JLabel lblEditIcon;
     private javax.swing.JFrame searchProveedor;
     public javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
 
     
@@ -1324,7 +1310,7 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
         searchProveedor.setVisible(true); 
     }
     
-<<<<<<< HEAD
+
     public void getProveedor(){
         int filaselect=jTable2.getSelectedRow();
         if(filaselect==-1){
@@ -1362,6 +1348,6 @@ public class JF_OrdenCompraADD extends javax.swing.JFrame {
 
 
 }    
-=======
-}
->>>>>>> master
+
+
+

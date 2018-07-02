@@ -261,7 +261,7 @@ public class Database {
             
         }
     }
-<<<<<<< HEAD
+
     
     public ResultSet buscarProveedor(String proveedor){
         String sql="exec sp_buscarProveedor ?";
@@ -289,6 +289,5 @@ public class Database {
         }
         return cont+1;
     }
-=======
->>>>>>> master
+
 }
