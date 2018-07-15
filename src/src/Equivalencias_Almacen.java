@@ -204,7 +204,9 @@ public class Equivalencias_Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_txtfactorActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();
+              JF_Modulo_Almacen menuAdmin=new JF_Modulo_Almacen();
+               menuAdmin.setVisible(true);
+                this.dispose();;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

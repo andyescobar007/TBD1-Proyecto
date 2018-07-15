@@ -171,6 +171,11 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("MODULO DE ALMACEN");
@@ -204,6 +209,11 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -263,7 +273,7 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_LB_ICON_MODULO_COMPRA1MouseClicked
 
     private void LB_ICON_MODULO_COMPRAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LB_ICON_MODULO_COMPRAMouseClicked
-        abrirModuloAlmacen();
+        abrirModuloventas();
     }//GEN-LAST:event_LB_ICON_MODULO_COMPRAMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -271,8 +281,16 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        abrirModuloAlmacen();
+        abrirModuloventas();
     }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        abrirUsuarios();;
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        abrirModuloAlmacen();
+    }//GEN-LAST:event_jPanel5MouseClicked
 
     
     private void abrirModuloCompra(){
@@ -283,6 +301,22 @@ public class JF_Menu_Administrador extends javax.swing.JFrame {
     private void abrirModuloAlmacen(){
         JF_Modulo_Almacen modulo_Almacen=new JF_Modulo_Almacen();
           modulo_Almacen.setVisible(true);
+          this.dispose();
+    }
+    
+    private void abrirUsuarios(){
+        Jf_Usuarios usuarios=new Jf_Usuarios();
+          usuarios.setVisible(true);
+          this.dispose();
+    }
+    private void abrirMenuAlmacen(){
+        Menu_Movimientos menu=new Menu_Movimientos();
+          menu.setVisible(true);
+          this.dispose();
+    }
+     private void abrirModuloventas(){
+        Menu_Ventas menu=new Menu_Ventas();
+          menu.setVisible(true);
           this.dispose();
     }
     

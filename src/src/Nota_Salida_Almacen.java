@@ -252,7 +252,9 @@ public class Nota_Salida_Almacen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CancelarActionPerformed
-        this.dispose();
+        Menu_Movimientos menuAdmin=new Menu_Movimientos();
+        menuAdmin.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_Btn_CancelarActionPerformed
 
     private void txtobservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtobservacionesActionPerformed

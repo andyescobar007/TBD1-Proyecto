@@ -333,7 +333,9 @@ public class Transferencia_Almacen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
+         Menu_Movimientos menuAdmin=new Menu_Movimientos();
+        menuAdmin.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

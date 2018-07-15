@@ -337,7 +337,9 @@ public class Productos_Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_Rbt_noActionPerformed
 
     private void Btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CancelarActionPerformed
-        this.dispose();
+        JF_Modulo_Almacen menuAdmin=new JF_Modulo_Almacen();
+        menuAdmin.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_Btn_CancelarActionPerformed
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed

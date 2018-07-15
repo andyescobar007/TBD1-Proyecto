@@ -429,7 +429,9 @@ public class Notas_Debito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       this.dispose();
+        Menu_Ventas menuAdmin=new Menu_Ventas();
+        menuAdmin.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

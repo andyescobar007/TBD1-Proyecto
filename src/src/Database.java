@@ -197,7 +197,18 @@ public class Database {
         return result;
    
     }
-     
+    
+     public ResultSet getUsuarios(){
+        resultset=null;
+        try {
+            PreparedStatement preparedS=conector.prepareStatement("SELECT * FROM Usuarios");
+            resultset=preparedS.executeQuery();
+            return resultset;
+        } catch (SQLException ex) {
+           
+        }
+        return resultset;
+    }
      
     public int getIDProductoCompra(){
         ResultSet resultset=null;

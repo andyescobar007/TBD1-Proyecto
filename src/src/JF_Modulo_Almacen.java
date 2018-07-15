@@ -9,6 +9,7 @@ package src;
 import diu.swe.habib.JPanelSlider.JPanelSlider;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -70,8 +71,7 @@ public class JF_Modulo_Almacen extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
         panelSlider = new diu.swe.habib.JPanelSlider.JPanelSlider();
         pnl1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         pnl2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -191,36 +191,24 @@ public class JF_Modulo_Almacen extends javax.swing.JFrame {
 
         pnl1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("BIENVENIDO AL MÓDULO DE ALMACÉN");
 
         javax.swing.GroupLayout pnl1Layout = new javax.swing.GroupLayout(pnl1);
         pnl1.setLayout(pnl1Layout);
         pnl1Layout.setHorizontalGroup(
             pnl1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(pnl1Layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         pnl1Layout.setVerticalGroup(
             pnl1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl1Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+            .addGroup(pnl1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         panelSlider.add(pnl1, "card2");
@@ -293,25 +281,20 @@ public class JF_Modulo_Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        colorSelected(btnProductos);
-        
-        cambiarpanel(pnl1);
+       abrirproductos();
     }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
         colorSelected(btnReportes);
-        
+        JOptionPane.showMessageDialog(null, "Esta opción no está disponible en este sistema");
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void btnMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMovimientosMouseClicked
-        colorSelected(btnMovimientos);
+        abrirmenumovimientos();
     }//GEN-LAST:event_btnMovimientosMouseClicked
 
     private void btnEquivalenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEquivalenciasMouseClicked
-        colorSelected(btnEquivalencias);
-        cambiarpanel(pnl2);
-        
-        
+        abrirequivalencias();
     }//GEN-LAST:event_btnEquivalenciasMouseClicked
 
     
@@ -356,18 +339,34 @@ public class JF_Modulo_Almacen extends javax.swing.JFrame {
     private javax.swing.JLabel btnEquivalencias;
     private javax.swing.JLabel btnMovimientos;
     private javax.swing.JLabel btnProductos;
-    private javax.swing.JLabel btnProveedores;
     private javax.swing.JLabel btnReportes;
     public javax.swing.JPanel content;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private diu.swe.habib.JPanelSlider.JPanelSlider panelSlider;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
     // End of variables declaration//GEN-END:variables
+private void abrirproductos(){
+        Productos_Almacen almacen=new Productos_Almacen();
+          almacen.setVisible(true);
+          this.dispose();
+}
+
+private void abrirequivalencias(){
+        Equivalencias_Almacen almacen=new Equivalencias_Almacen();
+          almacen.setVisible(true);
+          this.dispose();
+}
+
+
+private void abrirmenumovimientos(){
+        Menu_Movimientos almacen=new Menu_Movimientos();
+          almacen.setVisible(true);
+          this.dispose();
+}
 }
